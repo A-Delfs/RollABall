@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    public Rigidbody sphereRigidbody;
+    
+
+    [SerializeField] private Rigidbody sphereRigidbody;
+    
+    [SerializeField] private float ballspeed = 2f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -11,29 +15,14 @@ public class BallController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void MoveBall(Vector2 input)
     {
-        
-        Vector2 inputvector = Vector2.zero;
-        if (Input.GetKey(KeyCode.W)){
-            inputvector += Vector2.up;
-        }
 
-        if(Input.GetKey(KeyCode.A)){
-            inputvector += Vector2.left;
-        }
-        if(Input.GetKey(KeyCode.S)){
-            inputvector += Vector2.down;
-        }
-        if(Input.GetKey(KeyCode.D)){
-            inputvector += Vector2.right;
-        }
-    
-        
 
-        Vector3 inputXZPlane =  new(inputvector.x, 0, inputvector.y);
+
+        Vector3 inputXZPlane =  new(input.x, 0, input.y);
         
-        sphereRigidbody.AddForce(inputXZPlane);
+        sphereRigidbody.AddForce(inputXZPlane * ballspeed);
 
         
     }
